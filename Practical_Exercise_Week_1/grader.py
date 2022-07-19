@@ -14,16 +14,16 @@ from ipylab import JupyterFrontEnd
 import glob
 
 
-count = glob.glob('./*.ipynb')
+names = glob.glob('./*.ipynb')
 
 def getIPYNBCount():
-    if len(count) > 1:
+    if len(names) > 1:
         print('Two or more (.ipynb) files detected! Please keep only one file for grading')
         sys.exit()
 
 getIPYNBCount()
 
-nbfile = count[0]
+nbfile = names[0]
 
 def get_point(loc, task_number=1, cells = []):
     '''
@@ -62,6 +62,8 @@ def get_score(loc = nbfile):
     print("Testing your solution for Task 4: ReLU (Rectified Linear Unit)")
     points_d = get_point(loc, task_number=4, cells = [1,3,19,21])
     
+    pts = {"score": points_a + points_b + points_c + points_d/4}
+    print(pts['score'])
     return {"score": points_a + points_b + points_c + points_d}
 
 
@@ -74,32 +76,17 @@ loc = nbfile
 if __name__ == "__main__":
     print(f"Your score is: {get_score(loc)['score']} / 4.0")
 
-    """
-    Submit Score
-    """
-
-    button2 = widgets.Button(
-        description ='Fetch score',
-        disabled = False,
-        button_style = 'info',
-        tooltip = 'Submit your score to LMS')
-    
-    display(button2)
-
-
-    def on_button2_clicked(_):
-            app = JupyterFrontEnd()
-            app.commands.execute('docmanager:save')
-            clear_output()
-            print('score')
-
-    button2.on_click(on_button2_clicked)
-
-    """
-    open link to openHPI
-    """
 
     link_view = widgets.Output()
+    params = widgets.Output()
+
+    @params.capture(clear_output=True)
+    def params(_):
+        app = JupyterFrontEnd()
+        app.commands.execute('docmanager:save')
+        clear_output()
+        print(names[0])
+        #print('score')
 
     @link_view.capture(clear_output=True)
     def callback(url):
@@ -107,7 +94,7 @@ if __name__ == "__main__":
 
     button = widgets.Button(
         description = "Submit to openHPI", 
-        tooltip = 'https://open.hpi.de/courses/mypbt/items/2ZmFtAEWnAAWb44xJJMPzP', 
+        tooltip = 'https://jupyterhub.xopic.de/services/grading-service/', 
         button_style = 'success'
     )
     button.on_click(callback)
