@@ -18,7 +18,7 @@ names = glob.glob('./*.ipynb')
 
 def getIPYNBCount():
     if len(names) > 1:
-        print('Two or more (.ipynb) files detected! Please keep only one file for grading')
+        print('More than one (.ipynb) files detected! Please keep only one file for grading')
         sys.exit()
 
 getIPYNBCount()
