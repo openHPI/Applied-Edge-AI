@@ -64,6 +64,7 @@ def get_score(loc = nbfile):
     
     pts = {"score": (points_a + points_b + points_c + points_d)/4}
     print(pts['score'])
+    print(nbfile)
     return {"score": points_a + points_b + points_c + points_d}
 
 
@@ -85,7 +86,7 @@ if __name__ == "__main__":
         app = JupyterFrontEnd()
         app.commands.execute('docmanager:save')
         clear_output()
-        print(names[0])
+        #print(names[0])
         #print('score')
 
     @link_view.capture(clear_output=True)
