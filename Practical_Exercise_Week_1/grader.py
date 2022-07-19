@@ -62,7 +62,7 @@ def get_score(loc = nbfile):
     print("Testing your solution for Task 4: ReLU (Rectified Linear Unit)")
     points_d = get_point(loc, task_number=4, cells = [1,3,19,21])
     
-    pts = {"score": points_a + points_b + points_c + points_d/4}
+    pts = {"score": (points_a + points_b + points_c + points_d)/4}
     print(pts['score'])
     return {"score": points_a + points_b + points_c + points_d}
 
