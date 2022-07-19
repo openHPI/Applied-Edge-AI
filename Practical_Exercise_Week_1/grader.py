@@ -94,7 +94,7 @@ if __name__ == "__main__":
         display(Javascript(f'window.open("{url.tooltip}");'))
 
     button = widgets.Button(
-        description = "Submit to openHPI", 
+        description = "Submit Assignment", 
         tooltip = 'https://jupyterhub.xopic.de/services/grading-service/', 
         button_style = 'success'
     )
