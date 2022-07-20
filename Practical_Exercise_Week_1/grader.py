@@ -14,16 +14,16 @@ from ipylab import JupyterFrontEnd
 import glob
 
 
-names = glob.glob('./*.ipynb')
 
-def getIPYNBCount():
+def getIPYNBName():
+    
+    names = glob.glob('./*.ipynb')
     if len(names) > 1:
         print('More than one (.ipynb) files detected! Please keep only one file for grading')
         sys.exit()
+    else:
+        return names[0]
 
-getIPYNBCount()
-
-nbfile = names[0]
 
 def get_point(loc, task_number=1, cells = []):
     '''
@@ -42,7 +42,7 @@ def get_point(loc, task_number=1, cells = []):
     return point
 
 
-def get_score(loc = nbfile):
+def get_score(loc):
                                           
     for i in range(1):                                  
         print("\n")
@@ -64,20 +64,24 @@ def get_score(loc = nbfile):
     
     pts = {"score": (points_a + points_b + points_c + points_d)/4}
     print(pts['score'])
-    print(nbfile)
+    print(loc)
     return {"score": points_a + points_b + points_c + points_d}
 
 
-print("*"*85)
-print("Note: Please make sure you entered the correct notebook name for a successful grading")
-print("*"*85)
-print(f"Notebook name recieved: {nbfile}")
-loc = nbfile
-
 if __name__ == "__main__":
-    print(f"Your score is: {get_score(loc)['score']} / 4.0")
+    
+    # Checking if more than one notebook exist. If only one notebook exists, return the name of that notebook
+    nbfile = getIPYNBName()
+    
+    print("*"*85)
+    print("Note: Please make sure you entered the correct notebook name for a successful grading")
+    print("*"*85)
+    print(f"Notebook name recieved: {nbfile}")
 
+    # Printing Score
+    print(f"Your score is: {get_score(nbfile)['score']} / 4.0")
 
+    # Submit button code
     link_view = widgets.Output()
     params = widgets.Output()
 
@@ -97,6 +101,6 @@ if __name__ == "__main__":
         description = "Submit Assignment", 
         tooltip = 'https://jupyterhub.xopic.de/services/grading-service/', 
         button_style = 'success'
-    )
+        )
     button.on_click(callback)
     display(button, link_view)
