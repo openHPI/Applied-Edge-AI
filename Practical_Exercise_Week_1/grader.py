@@ -33,13 +33,11 @@ def get_point(loc, task_number=1, cells = []):
     point=0.0
     try:
         with testbook(loc, execute=cells) as tb:
-            if tb1.cell_output_text(cells[-1]) == 'Test passed.':
+            if tb.cell_output_text(cells[-1]) == 'Test passed.':
                 point+=1
                 print(f"Task {task_number} Passed. \u2705")
-                del tb
     except Exception:
         print(f"Task {task_number} failed. \u274c")
-        del tb
         return point
     return point
 
