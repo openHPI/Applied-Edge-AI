@@ -1,6 +1,6 @@
 """
 Created on Tue May 24 00:31:42 2022
-Last edited on Jul 13 12:00:33 2022
+Last edited on Jul 21 16:24:56 2022
 
 @author: Mohamed Elhayany
 @author: Ranji Raj
@@ -62,9 +62,8 @@ def get_score(loc):
     print("Testing your solution for Task 4: ReLU (Rectified Linear Unit)")
     points_d = get_point(loc, task_number=4, cells = [1,3,19,21])
     
-    pts = {"score": (points_a + points_b + points_c + points_d)/4}
-    print(pts['score'])
-    print(loc)
+    tiny_score = {"score": (points_a + points_b + points_c + points_d)/4}
+    print(tiny_score['score'])
     return {"score": points_a + points_b + points_c + points_d}
 
 
@@ -80,6 +79,9 @@ if __name__ == "__main__":
 
     # Printing Score
     print(f"Your score is: {get_score(nbfile)['score']} / 4.0")
+    print("*"*85)
+    print("JupyterLab environment variables")
+    print(nbfile)
 
     # Submit button code
     link_view = widgets.Output()
