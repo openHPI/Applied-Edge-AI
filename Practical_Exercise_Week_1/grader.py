@@ -62,8 +62,9 @@ def get_score(loc):
     print("Testing your solution for Task 4: ReLU (Rectified Linear Unit)")
     points_d = get_point(loc, task_number=4, cells = [1,3,19,21])
     
+    global tiny_score
     tiny_score = {"score": (points_a + points_b + points_c + points_d)/4}
-    print(tiny_score['score'])
+    
     return {"score": points_a + points_b + points_c + points_d}
 
 
@@ -82,6 +83,7 @@ if __name__ == "__main__":
     print("*"*85)
     print("JupyterLab environment variables")
     print(nbfile)
+    print(tiny_score['score'])
 
     # Submit button code
     link_view = widgets.Output()
