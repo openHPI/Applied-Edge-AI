@@ -72,13 +72,14 @@ if __name__ == "__main__":
     # Checking if more than one notebook exist. If only one notebook exists, return the name of that notebook
     nbfile = getIPYNBName()
     
-    JupyterFrontEnd().commands.execute('docmanager:save')
     
     print("*"*85)
     print("Note: Please make sure you entered the correct notebook name for a successful grading")
     print("*"*85)
     print(f"Notebook name recieved: {nbfile}")
 
+    JupyterFrontEnd().commands.execute('docmanager:save') # Intends to save the notebook before auto-grading
+    
     # Printing Score
     user_score = get_score(nbfile)['score']
     print(f"Your score is: {user_score} / 4.0")
