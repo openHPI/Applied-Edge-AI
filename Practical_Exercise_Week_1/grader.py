@@ -85,8 +85,10 @@ if __name__ == "__main__":
     print("*"*85)
     print("Debug Info")
     os.environ['score'] = str(user_score/4)
+    os.environ['NBPATH'] = nbfile
     
     print(os.environ['score'])
+    print(os.environ['NBPATH'])
     
     # Submit button code
     link_view = widgets.Output()
