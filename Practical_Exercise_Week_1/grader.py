@@ -85,10 +85,10 @@ if __name__ == "__main__":
     print(f"Your score is: {user_score} / 4.0")
     print("*"*85)
     print("Debug Info")
-    os.environ['score'] = str(user_score/4)
+    os.environ['NBSCORE'] = str(user_score/4)
     os.environ['NBPATH'] = nbfile
     
-    print(os.environ['score'])
+    print(os.environ['NBSCORE'])
     print(os.environ['NBPATH'])
     
     # Submit button code
