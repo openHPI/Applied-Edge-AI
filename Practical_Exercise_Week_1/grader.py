@@ -13,6 +13,7 @@ from IPython.display import display, Javascript, clear_output, display_javascrip
 from ipylab import JupyterFrontEnd
 import glob
 import os
+import gc
 
 
 
@@ -69,6 +70,9 @@ def get_score(loc):
 
 if __name__ == "__main__":
     
+    gc.enable() #Enable automatic garbage collection.
+    gc.collect() #run a full collection
+    
     # Checking if more than one notebook exist. If only one notebook exists, return the name of that notebook
     nbfile = getIPYNBName()
     
@@ -106,3 +110,5 @@ if __name__ == "__main__":
         )
     button.on_click(callback)
     display(button, link_view)
+    
+    gc.collect()
