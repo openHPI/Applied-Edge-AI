@@ -1,6 +1,6 @@
 """
 Created on Tue May 24 00:31:42 2022
-Last edited on Jul 21 16:24:56 2022
+Last edited on Jul 22 17:44:19 2022
 
 @author: Mohamed Elhayany
 @author: Ranji Raj
@@ -63,8 +63,6 @@ def get_score(loc):
     print("Testing your solution for Task 4: ReLU (Rectified Linear Unit)")
     points_d = get_point(loc, task_number=4, cells = [1,3,19,21])
     
-    #global tiny_score
-    #tiny_score = {"score": (points_a + points_b + points_c + points_d)/4}
     
     return {"score": points_a + points_b + points_c + points_d}
 
@@ -73,6 +71,8 @@ if __name__ == "__main__":
     
     # Checking if more than one notebook exist. If only one notebook exists, return the name of that notebook
     nbfile = getIPYNBName()
+    
+    JupyterFrontEnd().commands.execute('docmanager:save')
     
     print("*"*85)
     print("Note: Please make sure you entered the correct notebook name for a successful grading")
@@ -87,19 +87,10 @@ if __name__ == "__main__":
     os.environ['score'] = str(user_score/4)
     
     print(os.environ['score'])
-    #print(tiny_score['score'])
-
+    
     # Submit button code
     link_view = widgets.Output()
-    params = widgets.Output()
 
-    @params.capture(clear_output=True)
-    def params(_):
-        app = JupyterFrontEnd()
-        app.commands.execute('docmanager:save')
-        clear_output()
-        #print(names[0])
-        #print('score')
 
     @link_view.capture(clear_output=True)
     def callback(url):
