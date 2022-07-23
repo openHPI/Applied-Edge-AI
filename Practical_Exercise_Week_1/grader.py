@@ -89,11 +89,12 @@ if __name__ == "__main__":
     print(f"Your score is: {user_score} / 4.0")
     print("*"*85)
     print("Debug Info")
-    os.environ['NBSCORE'] = str(user_score/4)
     os.environ['NBPATH'] = nbfile
+    os.environ['NBSCORE'] = str(user_score/4)
     
-    print(os.environ['NBSCORE'])
+    
     print(os.environ['NBPATH'])
+    print(os.environ['NBSCORE'])
     
     # Submit button code
     link_view = widgets.Output()
