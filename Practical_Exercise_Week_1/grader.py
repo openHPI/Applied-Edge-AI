@@ -85,7 +85,18 @@ if __name__ == "__main__":
     JupyterFrontEnd().commands.execute('docmanager:save') # Intends to save the notebook before auto-grading
     
     # Printing Score
+    import time
+    # get the start time
+    st = time.time()
+    
     user_score = get_score(nbfile)['score']
+    
+    # get the end time
+    et = time.time()
+    # get the execution time
+    elapsed_time = et - st
+    print('Execution time:', elapsed_time, 'seconds')
+
     print(f"Your score is: {user_score} / 4.0")
     print("*"*85)
     print("Debug Info")
