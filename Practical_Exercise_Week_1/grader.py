@@ -1,6 +1,6 @@
 """
 Created on Tue May 24 00:31:42 2022
-Last edited on Jul 22 17:44:19 2022
+Last edited on Jul 25 13:53:19 2022
 
 @author: Mohamed Elhayany
 @author: Ranji Raj
@@ -10,12 +10,11 @@ import sys
 from testbook import testbook
 import ipywidgets as widgets
 from IPython.display import display, Javascript, clear_output, display_javascript
-from IPython import get_ipython
 from ipylab import JupyterFrontEnd
 import glob
 import os
-import time
 import gc
+import time
 
 
 
@@ -70,25 +69,33 @@ def get_score(loc):
     return {"score": points_a + points_b + points_c + points_d}
 
 
+    def restartkernel():
+        time.sleep(1.5)
+        os._exit(00)
+    
+    @link_view.capture(clear_output=True)
+    def callback(url):
+        display(Javascript(data=f'window.open("{url.tooltip}");'))
+        restartkernel()
+
+
+
 if __name__ == "__main__":
-    
-    gc.enable() #Enable automatic garbage collection.
-    gc.collect() #run a full collection
-    
+        
     # Checking if more than one notebook exist. If only one notebook exists, return the name of that notebook
     nbfile = getIPYNBName()
-    
-    get_ipython().magic('reset -sf') #Clear variables before script runs
-    JupyterFrontEnd().commands.execute('docmanager:save') # Intends to save the notebook before auto-grading
-    clear_output()
     
     print("*"*85)
     print("Note: Please make sure you entered the correct notebook name for a successful grading")
     print("*"*85)
     print(f"Notebook name recieved: {nbfile}")
 
+    # Intends to save the notebook before auto-grading
+    JupyterFrontEnd().commands.execute('docmanager:save') 
     
-    # Printing Score
+    ###########################
+    ##### Scoring #############
+    ###########################
     import time
     # get the start time
     st = time.time()
@@ -103,6 +110,7 @@ if __name__ == "__main__":
 
     print(f"Your score is: {user_score} / 4.0")
     print("*"*85)
+    
     print("Debug Info")
     os.environ['NBPATH'] = nbfile
     os.environ['NBSCORE'] = str(user_score/4)
@@ -114,13 +122,6 @@ if __name__ == "__main__":
     # Submit button code
     link_view = widgets.Output()
 
-
-    @link_view.capture(clear_output=True)
-    def callback(url):
-        display(Javascript(f'window.open("{url.tooltip}");'))
-        time.sleep(3)
-        os._exit(00)
-
     button = widgets.Button(
         description = "Submit Assignment", 
         tooltip = 'https://jupyterhub.xopic.de/services/grading-service/', 
@@ -128,5 +129,3 @@ if __name__ == "__main__":
         )
     button.on_click(callback)
     display(button, link_view)
-    
-    #gc.collect()
