@@ -117,6 +117,8 @@ if __name__ == "__main__":
     @link_view.capture(clear_output=True)
     def callback(url):
         display(Javascript(f'window.open("{url.tooltip}");'))
+        time.sleep(3)
+        os._exit(00)
 
     button = widgets.Button(
         description = "Submit Assignment", 
@@ -126,4 +128,4 @@ if __name__ == "__main__":
     button.on_click(callback)
     display(button, link_view)
     
-    gc.collect()
+    #gc.collect()
