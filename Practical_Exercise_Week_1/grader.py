@@ -10,6 +10,7 @@ import sys
 from testbook import testbook
 import ipywidgets as widgets
 from IPython.display import display, Javascript, clear_output, display_javascript
+from IPython import get_ipython
 from ipylab import JupyterFrontEnd
 import glob
 import os
@@ -76,6 +77,7 @@ if __name__ == "__main__":
     # Checking if more than one notebook exist. If only one notebook exists, return the name of that notebook
     nbfile = getIPYNBName()
     
+    get_ipython().magic('reset -sf') #Clear variables before script runs
     JupyterFrontEnd().commands.execute('docmanager:save') # Intends to save the notebook before auto-grading
     clear_output()
     
