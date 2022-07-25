@@ -69,14 +69,14 @@ def get_score(loc):
     return {"score": points_a + points_b + points_c + points_d}
 
 
-    def restartkernel():
-        time.sleep(1.5)
-        os._exit(00)
+def restartkernel():
+    time.sleep(1.5)
+    os._exit(00)
     
-    @link_view.capture(clear_output=True)
-    def callback(url):
-        display(Javascript(data=f'window.open("{url.tooltip}");'))
-        restartkernel()
+@link_view.capture(clear_output=True)
+def callback(url):
+    display(Javascript(data=f'window.open("{url.tooltip}");'))
+    restartkernel()
 
 
 
