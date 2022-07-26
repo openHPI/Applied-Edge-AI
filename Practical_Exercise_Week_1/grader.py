@@ -13,7 +13,6 @@ from IPython.display import display, Javascript, clear_output, display_javascrip
 from ipylab import JupyterFrontEnd
 import glob
 import os
-import gc
 import time
 
 
