@@ -72,6 +72,15 @@ def restartkernel():
     time.sleep(1.5)
     os._exit(00)
     
+def save_data(textlist):
+    
+    outF = open("/etc/data/score.txt", "w")
+    for line in textList:
+      # write line to output file
+      outF.write(line)
+      outF.write("\n")
+    outF.close()
+    
 
 
 
@@ -110,6 +119,7 @@ if __name__ == "__main__":
     os.environ['NBPATH'] = nbfile
     os.environ['NBSCORE'] = str(user_score/4)
     
+    save_data([nbfile, str(user_score/4)])
     
     print(os.environ['NBPATH'])
     print(os.environ['NBSCORE'])
