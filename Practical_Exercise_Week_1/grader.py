@@ -74,8 +74,8 @@ def restartkernel():
     
 def save_data(textlist):
     user = os.getenv('JUPYTERHUB_USER')
-    outF = open("./data/{user}_score.txt", "w")
-    for line in textList:
+    outF = open(f"/home/jovyan/data/{user}_score.txt", "w")
+    for line in textlist:
       # write line to output file
       outF.write(line)
       outF.write("\n")
@@ -119,7 +119,7 @@ if __name__ == "__main__":
     os.environ['NBPATH'] = nbfile
     os.environ['NBSCORE'] = str(user_score/4)
     
-    save_data([nbfile, str(user_score/4)])
+    save_data(textlist=[nbfile, str(user_score/4)])
     
     print(os.environ['NBPATH'])
     print(os.environ['NBSCORE'])
