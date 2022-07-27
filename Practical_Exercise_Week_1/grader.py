@@ -73,8 +73,8 @@ def restartkernel():
     os._exit(00)
     
 def save_data(textlist):
-    
-    outF = open("/etc/data/score.txt", "w")
+    user = os.getenv('JUPYTERHUB_USER')
+    outF = open("./data/{user}_score.txt", "w")
     for line in textList:
       # write line to output file
       outF.write(line)
