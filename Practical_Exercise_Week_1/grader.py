@@ -74,7 +74,7 @@ def restartkernel():
     
 def save_data(textlist):
     user = os.getenv('JUPYTERHUB_USER')
-    outF = open(f"/home/jovyan/data/{user}_score.txt", "w")
+    outF = open(f"/home/jovyan/.user_score/{user}.txt", "w")
     for line in textlist:
       # write line to output file
       outF.write(line)
