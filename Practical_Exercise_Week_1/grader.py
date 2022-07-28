@@ -13,7 +13,7 @@ from IPython.display import display, Javascript, clear_output, display_javascrip
 from ipylab import JupyterFrontEnd
 import glob
 import os
-from stat import S_IREAD, S_IRGRP, S_IROTH
+from stat import S_IREAD, S_IRGRP, S_IROTH, S_IWUSR
 import time
 
 
@@ -76,6 +76,8 @@ def restartkernel():
 def save_data(textlist):
     user = os.getenv('JUPYTERHUB_USER')
     filename = f"/home/jovyan/.user_score/{user}.txt"
+    if os.path.exists(filename):
+        os.chmod(filename, S_IWUSR|S_IREAD)
     outF = open(filename, "w")
     for line in textlist:
       # write line to output file
