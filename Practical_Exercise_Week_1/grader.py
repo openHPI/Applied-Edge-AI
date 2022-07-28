@@ -1,6 +1,6 @@
 """
 Created on Tue May 24 00:31:42 2022
-Last edited on Jul 25 13:53:19 2022
+Last edited on Jul 28 21:55:19 2022
 
 @author: Mohamed Elhayany
 @author: Ranji Raj
@@ -13,6 +13,7 @@ from IPython.display import display, Javascript, clear_output, display_javascrip
 from ipylab import JupyterFrontEnd
 import glob
 import os
+from stat import S_IREAD, S_IRGRP, S_IROTH
 import time
 
 
@@ -74,11 +75,14 @@ def restartkernel():
     
 def save_data(textlist):
     user = os.getenv('JUPYTERHUB_USER')
-    outF = open(f"/home/jovyan/.user_score/{user}.txt", "w")
+    filename = f"/home/jovyan/.user_score/{user}.txt"
+    outF = open(filename, "w")
     for line in textlist:
       # write line to output file
       outF.write(line)
       outF.write("\n")
+    os.chmod(filename, S_IREAD|S_IRGRP|S_IROTH)
+
     outF.close()
     
 
@@ -110,19 +114,16 @@ if __name__ == "__main__":
     et = time.time()
     # get the execution time
     elapsed_time = et - st
-    print('Execution time:', elapsed_time, 'seconds')
+ #   print('Execution time:', elapsed_time, 'seconds')
 
     print(f"Your score is: {user_score} / 4.0")
     print("*"*85)
     
-    print("Debug Info")
-    os.environ['NBPATH'] = nbfile
-    os.environ['NBSCORE'] = str(user_score/4)
+#    print("Debug Info")
+#    os.environ['NBPATH'] = nbfile
+#    os.environ['NBSCORE'] = str(user_score/4)
     
     save_data(textlist=[nbfile, str(user_score/4)])
-    
-    print(os.environ['NBPATH'])
-    print(os.environ['NBSCORE'])
     
     # Submit button code
     link_view = widgets.Output()
