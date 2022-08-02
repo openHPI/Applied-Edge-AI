@@ -100,7 +100,8 @@ if __name__ == "__main__":
     nbfile = getIPYNBName()
     
     print("*"*100)
-    print("Note: Please make sure you have \033[1mnot\033[0m added (or deleted) any cells in this notebook before this cell. \n(Otherwise the grading process might fail despite you having the correct solution.)")
+    print("Note: Please make sure you have \033[1mnot\033[0m added (or deleted) any cells in this notebook before this cell. \
+          \n(Otherwise the grading process might fail despite you having the correct solution.)")
     print("*"*100)
     print(f"Notebook name recieved: {nbfile}")
 
