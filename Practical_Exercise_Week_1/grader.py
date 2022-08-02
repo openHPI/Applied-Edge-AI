@@ -80,10 +80,12 @@ def save_data(textlist):
     # Checking if this is not the first submission
     if os.path.exists(filename):
         os.chmod(filename, S_IWUSR|S_IREAD)
-        outF = open(filename, "a+")
+        outF = open(filename, "r+")
         lines = outF.readlines()
-        print(lines)
+        #print(lines)
         lines[0] = f"{textlist[0]}\n"
+        outF.close()
+        outF = open(filename, "w")
         outF.writelines(lines)
         outF.write(f"{textlist[1]}\n")
     else:
