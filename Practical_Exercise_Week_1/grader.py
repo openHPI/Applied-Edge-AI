@@ -8,13 +8,10 @@ Last edited on Aug 2 11:55:19 2022
 
 import sys
 from testbook import testbook
-import ipywidgets as widgets
-from IPython.display import display, Javascript, clear_output, display_javascript
 from ipylab import JupyterFrontEnd
 import glob
 import os
 from stat import S_IREAD, S_IRGRP, S_IROTH, S_IWUSR
-import time
 
 
 
@@ -69,10 +66,6 @@ def get_score(loc):
     return {"score": points_a + points_b + points_c + points_d}
 
 
-def restartkernel():
-    time.sleep(1.5)
-    os._exit(00)
-    
 def save_data(textlist):
     user = os.getenv('JUPYTERHUB_USER')
     filename = f"/home/jovyan/.user_score/{user}.txt"
@@ -106,9 +99,9 @@ if __name__ == "__main__":
     # Checking if more than one notebook exist. If only one notebook exists, return the name of that notebook
     nbfile = getIPYNBName()
     
-    print("*"*85)
-    print("Note: Please make sure you entered the correct notebook name for a successful grading")
-    print("*"*85)
+    print("*"*100)
+    print("Note: Please make sure you have \033[1mnot\033[0m added (or deleted) any cells in this notebook before this cell. \n(Otherwise the grading process might fail despite you having the correct solution.)")
+    print("*"*100)
     print(f"Notebook name recieved: {nbfile}")
 
     # Intends to save the notebook before auto-grading
@@ -116,40 +109,10 @@ if __name__ == "__main__":
     
     ###########################
     ##### Scoring #############
-    ###########################
-    import time
-    # get the start time
-    st = time.time()
-    
+    ########################### 
     user_score = get_score(nbfile)['score']
-    
-    # get the end time
-    et = time.time()
-    # get the execution time
-    elapsed_time = et - st
- #   print('Execution time:', elapsed_time, 'seconds')
-
+   
     print(f"Your score is: {user_score} / 4.0")
     print("*"*85)
-    
-#    print("Debug Info")
-#    os.environ['NBPATH'] = nbfile
-#    os.environ['NBSCORE'] = str(user_score/4)
-    
+ 
     save_data(textlist=[nbfile, str(user_score/4)])
-    
-    # Submit button code
-    link_view = widgets.Output()
-    
-    @link_view.capture(clear_output=True)
-    def callback(url):
-        display(Javascript(data=f'window.open("{url.tooltip}");'))
-        restartkernel()
-
-    button = widgets.Button(
-        description = "Submit Assignment", 
-        tooltip = 'https://jupyterhub.xopic.de/services/grading-service/', 
-        button_style = 'success'
-        )
-    button.on_click(callback)
-    display(button, link_view)
