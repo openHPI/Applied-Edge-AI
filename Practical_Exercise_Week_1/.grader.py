@@ -82,6 +82,7 @@ def save_data(textlist):
         os.chmod(filename, S_IWUSR|S_IREAD)
         outF = open(filename, "a+")
         lines = outF.readlines()
+        print(lines)
         lines[0] = f"{textlist[0]}\n"
         outF.writelines(lines)
         outF.write(f"{textlist[1]}\n")
