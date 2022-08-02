@@ -76,19 +76,27 @@ def restartkernel():
 def save_data(textlist):
     user = os.getenv('JUPYTERHUB_USER')
     filename = f"/home/jovyan/.user_score/{user}.txt"
+    
+    # Checking if this is not the first submission
     if os.path.exists(filename):
         os.chmod(filename, S_IWUSR|S_IREAD)
-    outF = open(filename, "w")
-    for line in textlist:
-      # write line to output file
-      outF.write(line)
-      outF.write("\n")
+        outF = open(filename, "a")
+        lines = outF.readlines()
+        lines[0] = f"{textlist[0]}\n"
+        outF.writelines(lines)
+        outF.write(f"{textlist[1]}\n")
+    else:
+        outF = open(filename, "w")
+        for line in textlist:
+            # write line to output file
+            outF.write(line)
+            outF.write("\n")
+     
+    #Make file unwritable
     os.chmod(filename, S_IREAD|S_IRGRP|S_IROTH)
 
     outF.close()
     
-
-
 
 if __name__ == "__main__":
         
