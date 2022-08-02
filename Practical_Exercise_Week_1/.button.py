@@ -17,7 +17,7 @@ if __name__ == "__main__":
     @link_view.capture(clear_output=True)
     def callback(url):
         display(Javascript(data=f'window.open("{url.tooltip}");'))
-        restartkernel()
+        #restartkernel()
 
     button = widgets.Button(
         description = "Submit Assignment", 
