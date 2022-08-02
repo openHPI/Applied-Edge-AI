@@ -1,7 +1,7 @@
 import ipywidgets as widgets
 from IPython.display import display, Javascript, clear_output, display_javascript
 from ipylab import JupyterFrontEnd
-import os
+import os, time
 
 
 def restartkernel():
